@@ -20,16 +20,13 @@ Execute the C Program for the desired output.
 # PROGRAM:
 
 ## 1.To Write a C program that illustrates files copying 
-
-
 ```
 #include <unistd.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdlib.h>
 int main()
-{
-char block[1024];
+{char block[1024];
 int in, out;
 int nread;
 in = open("filecopy.c", O_RDONLY);
@@ -56,42 +53,27 @@ int main (int argc, char* argv[])
  printf ("opening %s\n", file);
  /* Open a file descriptor to the file. */
  fd = open (file, O_WRONLY);
-// acquire shared lock
 if (flock(fd, LOCK_SH) == -1) {
     printf("error");
 }else
-{printf("Acquiring shared lock using flock");
-}
+{printf("Acquiring shared lock using flock");}
 getchar();
-// non-atomically upgrade to exclusive lock
-// do it in non-blocking mode, i.e. fail if can't upgrade immediately
 if (flock(fd, LOCK_EX | LOCK_NB) == -1) {
     printf("error");
 }else
 {printf("Acquiring exclusive lock using flock");}
 getchar();
-// release lock
-// lock is also released automatically when close() is called or process exits
 if (flock(fd, LOCK_UN) == -1) {
     printf("error");
 }else{
-printf("unlocking");
-}
+printf("unlocking");}
 getchar();
 close (fd);
 return 0;
 }
 ```
-
-
-
 ## OUTPUT
-
 ![Screenshot 2024-10-16 181817](https://github.com/user-attachments/assets/8cbe9b31-0860-4ead-a856-d6c9523bf0a2)
 ![Screenshot 2024-10-16 192545](https://github.com/user-attachments/assets/42bbe9b0-5f1b-45d6-bb65-451bc373d957)
-
-
-
-
 # RESULT:
 The programs are executed successfully.
